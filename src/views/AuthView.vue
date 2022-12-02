@@ -48,12 +48,25 @@
             class="auth_card_input"
           />
         </div>
-        <button>Registration</button>
+        <button type="submit" @click="CallMe">Registration</button>
       </form>
     </div>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  props: {
+    callMe: {
+      type: Function,
+    },
+  },
+  methods: {
+    submit() {
+      this.callMe('yes');
+    },
+  },
+};
+</script>
 <style>
 .auth {
   padding-block: 1em;
