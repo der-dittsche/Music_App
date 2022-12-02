@@ -21,15 +21,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-
-      - uses: actions/checkout@v3
-      - name: run eslint test
       - run: npm run lint
-
-      - uses: actions/checkout@v3
-      - name: run jest unit test
       - run: npm run test:unit
-
-      - uses: actions/checkout@v3
-      - name: run cypress e2e test
       - run: npm run test:e2e
