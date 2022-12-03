@@ -1,11 +1,22 @@
 <template>
-  <h1>Hallo Auth</h1>
   <div class="container">
     <div class="auth_tab">
-      <p class="auth_tab_item">Login</p>
-      <p class="auth_tab_item">Registration</p>
+      <div
+        class="auth_tab_item"
+        :class="{ is_active: !register }"
+        @click.prevent="register = false"
+      >
+        Login
+      </div>
+      <div
+        class="auth_tab_item"
+        :class="{ is_active: register }"
+        @click.prevent="register = true"
+      >
+        Registration
+      </div>
     </div>
-    <div class="auth">
+    <!--     <div class="auth">
       <form action="submit" class="auth_card_auth">
         <div class="auth_card_element">
           <label for="auth_email" class="auth_card_label">E-Mail:</label>
@@ -27,34 +38,61 @@
         </div>
         <button>Login</button>
       </form>
-    </div>
+    </div> -->
     <div class="auth">
-      <form action="submit" class="auth_card_auth">
+      <form action="submit" class="auth_card_auth" @submit.prevent="onSubmit">
+        <div class="auth_title">
+          <h1>{{ formTitle }}</h1>
+        </div>
         <div class="auth_card_element">
           <label for="auth_email" class="auth_card_label">E-Mail:</label>
           <input
+            v-model="credentials.email"
             type="email"
             name="auth_email"
             id="auth_email"
             class="auth_card_input"
+            placeholder="lassmi_randa_den_siewillja@madrid.es"
           />
         </div>
         <div class="auth_card_element">
           <label for="auth_password" class="auth_card_label">Password:</label>
           <input
+            v-model="credentials.password"
             type="password"
             name="auth_password"
             id="auth_password"
             class="auth_card_input"
+            placeholder="Enter a password"
           />
         </div>
-        <button type="submit" @click="CallMe">Registration</button>
+        <button type="submit" @click="CallMe">{{ formTitle }}</button>
       </form>
     </div>
   </div>
 </template>
 <script>
+import { ref, computed, reactive } from 'vue';
+import { useStoreAuth } from '@/stores/storeAuth';
+
 export default {
+  data() {
+    const register = ref(false);
+    const formTitle = computed(() => {
+      return register.value ? 'Register' : 'Login';
+    });
+    const credentials = reactive({
+      email: '',
+      password: '',
+    });
+    const storeAuth = useStoreAuth();
+    return {
+      register,
+      formTitle,
+      credentials,
+      storeAuth,
+    };
+  },
   props: {
     callMe: {
       type: Function,
@@ -63,6 +101,17 @@ export default {
   methods: {
     submit() {
       this.callMe('yes');
+    },
+    onSubmit() {
+      if (!this.credentials.email || !this.credentials.password) {
+        console.log('wrong entry');
+      } else {
+        if (this.register) {
+          this.storeAuth.registerUser(this.credentials);
+        } else {
+          this.storeAuth.loginUser(this.credentials);
+        }
+      }
     },
   },
 };
@@ -78,6 +127,7 @@ export default {
   gap: 2em;
 }
 .auth_tab_item {
+  cursor: pointer;
   background-color: cornflowerblue;
   text-align: center;
   width: 10em;
@@ -85,6 +135,9 @@ export default {
   border-radius: 0.5em;
 }
 .auth_tab_item:hover {
+  background-color: rgb(157, 185, 236);
+}
+.is_active {
   background-color: rgb(157, 185, 236);
 }
 .auth_card_auth {

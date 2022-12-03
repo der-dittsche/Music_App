@@ -5,9 +5,22 @@
       <RouterLink to="/manage" class="nav_item">Manage</RouterLink>
       <RouterLink to="/user" class="nav_item">User</RouterLink>
       <RouterLink to="/auth" class="nav_item">Auth</RouterLink>
+      <div class="nav_item" @click="storeAuth.logoutUser">Logout</div>
     </div>
   </nav>
 </template>
+<script>
+import { useStoreAuth } from '@/stores/storeAuth';
+
+export default {
+  data() {
+    const storeAuth = useStoreAuth();
+    return {
+      storeAuth,
+    };
+  },
+};
+</script>
 <style>
 .navbar {
   display: flex;
