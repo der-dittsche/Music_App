@@ -66,7 +66,7 @@
             placeholder="Enter a password"
           />
         </div>
-        <button type="submit" @click="CallMe">{{ formTitle }}</button>
+        <button type="submit">{{ formTitle }}</button>
       </form>
     </div>
   </div>
@@ -99,9 +99,6 @@ export default {
     },
   },
   methods: {
-    submit() {
-      this.callMe('yes');
-    },
     onSubmit() {
       if (!this.credentials.email || !this.credentials.password) {
         console.log('wrong entry');
