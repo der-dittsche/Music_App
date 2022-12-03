@@ -17,15 +17,20 @@ import { auth } from './firebase';
 import { db } from '@/stores/firebase';
 
 let usersCollectionRef;
+let songsCollectionRef;
 let usersCollectionQuerry;
+let songsCollectionQuerry;
 let getUsersSnapshot = null;
+let getSongsSnapshot = null;
 
 export const useStoreUser = defineStore('storeUser', {
   state: () => {
     return {
       users: [],
+      songs: [],
       user: {},
       usersLoaded: false,
+      songsLoaded: false,
     };
   },
   actions: {
@@ -35,12 +40,16 @@ export const useStoreUser = defineStore('storeUser', {
           this.user.id = user.uid;
           this.user.email = user.email;
           usersCollectionRef = collection(db, 'users', this.user.id, 'details');
+          songsCollectionRef = collection(db, 'users', this.user.id, 'songs');
           usersCollectionQuerry = query(usersCollectionRef);
+          songsCollectionQuerry = query(songsCollectionRef);
           this.getUsers();
+          this.getSongs();
           this.router.push('/');
         } else {
           this.user = {};
           this.clearUsers();
+          this.clearSongs();
           this.router.replace('/auth');
         }
       });
@@ -62,6 +71,27 @@ export const useStoreUser = defineStore('storeUser', {
 
         this.users = users;
         this.usersLoaded = true;
+      });
+    },
+    async getSongs() {
+      this.songsLoaded = false;
+      getSongsSnapshot = onSnapshot(songsCollectionQuerry, querySnapshot => {
+        const songs = [];
+        querySnapshot.forEach(doc => {
+          const song = {
+            id: doc.id,
+            comment_count: doc.data().comment_count,
+            display_name: doc.data().display_name,
+            original_name: doc.data().original_name,
+            modified_name: doc.data().modified_name,
+            genre: doc.data().genre,
+            url: doc.data().url,
+          };
+          songs.push(song);
+        });
+
+        this.songs = songs;
+        this.songsLoaded = true;
       });
     },
     registerUser(credentials) {
@@ -108,6 +138,17 @@ export const useStoreUser = defineStore('storeUser', {
         email: credentials.email,
       });
     },
+    async addSong(song) {
+      usersCollectionRef = collection(db, 'users', this.user.id, 'songs');
+      await addDoc(songsCollectionRef, {
+        comment_count: song.comment_count,
+        display_name: song.display_name,
+        original_name: song.original_name,
+        modified_name: song.modified_name,
+        genre: song.genre,
+        url: song.url,
+      });
+    },
     async updateUser(infos) {
       usersCollectionRef = collection(db, 'users', this.user.id, 'details');
       await updateDoc(doc(usersCollectionRef, infos.id), {
@@ -118,6 +159,10 @@ export const useStoreUser = defineStore('storeUser', {
     clearUsers() {
       this.users = [];
       if (getUsersSnapshot) getUsersSnapshot(); // unsubscribe from any listener
+    },
+    clearSongs() {
+      this.songs = [];
+      if (getSongsSnapshot) getSongsSnapshot(); // unsubscribe from any listener
     },
   },
   getters: {},
