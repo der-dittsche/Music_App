@@ -2,26 +2,31 @@
   <h1>Manage your Music</h1>
   <div class="container">
     <div class="upload">
-      <UploadFiles />
+      <UploadFiles ref="upload" />
     </div>
     <div class="manage_music">
-      <ul>
-        <li>Songname 1 <button>edit</button><button>delete</button></li>
-        <li>Songname 2 <button>edit</button><button>delete</button></li>
-        <li>Songname 3 <button>edit</button><button>delete</button></li>
-        <li>Songname 4 <button>edit</button><button>delete</button></li>
-      </ul>
+      <ListFiles v-for="song in storeUser.songs" :key="song.id" :song="song" />
     </div>
   </div>
 </template>
 <script>
 import UploadFiles from '../components/uploadFiles.vue';
+import ListFiles from '../components/ListFiles.vue';
+import { useStoreUser } from '@/stores/storeUser';
 export default {
   data() {
-    return;
+    const storeUser = useStoreUser();
+    return {
+      storeUser,
+    };
   },
   components: {
     UploadFiles,
+    ListFiles,
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$refs.upload.cancelUploads();
+    next();
   },
 };
 </script>
