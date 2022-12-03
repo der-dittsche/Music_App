@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
 import ManageView from '@/views/ManageView.vue';
 import UserDetailsView from '@/views/UserDetailsView.vue';
+import EditUserDetails from '@/components/EditUserDetails.vue';
 import AuthView from '@/views/AuthView.vue';
 
 const router = createRouter({
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/user',
       name: 'user',
       component: UserDetailsView,
+    },
+    {
+      path: '/edituserdetails/:id',
+      name: 'edituserdetails',
+      component: EditUserDetails,
     },
     {
       path: '/auth',

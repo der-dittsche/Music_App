@@ -16,29 +16,6 @@
         Registration
       </div>
     </div>
-    <!--     <div class="auth">
-      <form action="submit" class="auth_card_auth">
-        <div class="auth_card_element">
-          <label for="auth_email" class="auth_card_label">E-Mail:</label>
-          <input
-            type="email"
-            name="auth_email"
-            id="auth_email"
-            class="auth_card_input"
-          />
-        </div>
-        <div class="auth_card_element">
-          <label for="auth_password" class="auth_card_label">Password:</label>
-          <input
-            type="password"
-            name="auth_password"
-            id="auth_password"
-            class="auth_card_input"
-          />
-        </div>
-        <button>Login</button>
-      </form>
-    </div> -->
     <div class="auth">
       <form action="submit" class="auth_card_auth" @submit.prevent="onSubmit">
         <div class="auth_title">
@@ -73,7 +50,7 @@
 </template>
 <script>
 import { ref, computed, reactive } from 'vue';
-import { useStoreAuth } from '@/stores/storeAuth';
+import { useStoreUser } from '@/stores/storeUser';
 
 export default {
   data() {
@@ -85,12 +62,13 @@ export default {
       email: '',
       password: '',
     });
-    const storeAuth = useStoreAuth();
+    const storeUser = useStoreUser();
+
     return {
       register,
       formTitle,
       credentials,
-      storeAuth,
+      storeUser,
     };
   },
   props: {
@@ -104,9 +82,9 @@ export default {
         console.log('wrong entry');
       } else {
         if (this.register) {
-          this.storeAuth.registerUser(this.credentials);
+          this.storeUser.registerUser(this.credentials);
         } else {
-          this.storeAuth.loginUser(this.credentials);
+          this.storeUser.loginUser(this.credentials);
         }
       }
     },

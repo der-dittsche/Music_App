@@ -1,22 +1,22 @@
 <template>
   <nav>
     <div class="navbar">
-      <RouterLink to="/" class="nav_item" v-if="storeAuth.user.id"
+      <RouterLink to="/" class="nav_item" v-if="storeUser.user.id"
         >Home</RouterLink
       >
-      <RouterLink to="/manage" class="nav_item" v-if="storeAuth.user.id"
+      <RouterLink to="/manage" class="nav_item" v-if="storeUser.user.id"
         >Manage</RouterLink
       >
-      <RouterLink to="/user" class="nav_item" v-if="storeAuth.user.id"
+      <RouterLink to="/user" class="nav_item" v-if="storeUser.user.id"
         >User</RouterLink
       >
-      <RouterLink to="/auth" class="nav_item" v-if="!storeAuth.user.id"
+      <RouterLink to="/auth" class="nav_item" v-if="!storeUser.user.id"
         >Auth</RouterLink
       >
       <div
         class="nav_item"
-        @click="storeAuth.logoutUser"
-        v-if="storeAuth.user.id"
+        @click="storeUser.logoutUser"
+        v-if="storeUser.user.id"
       >
         Logout
       </div>
@@ -24,13 +24,13 @@
   </nav>
 </template>
 <script>
-import { useStoreAuth } from '@/stores/storeAuth';
+import { useStoreUser } from '@/stores/storeUser';
 
 export default {
   data() {
-    const storeAuth = useStoreAuth();
+    const storeUser = useStoreUser();
     return {
-      storeAuth,
+      storeUser,
     };
   },
 };
