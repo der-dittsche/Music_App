@@ -1,13 +1,40 @@
 <template>
   <nav>
     <div class="navbar">
-      <RouterLink to="/" class="nav_item">Home</RouterLink>
-      <RouterLink to="/manage" class="nav_item">Manage</RouterLink>
-      <RouterLink to="/user" class="nav_item">User</RouterLink>
-      <RouterLink to="/auth" class="nav_item">Auth</RouterLink>
+      <RouterLink to="/" class="nav_item" v-if="storeAuth.user.id"
+        >Home</RouterLink
+      >
+      <RouterLink to="/manage" class="nav_item" v-if="storeAuth.user.id"
+        >Manage</RouterLink
+      >
+      <RouterLink to="/user" class="nav_item" v-if="storeAuth.user.id"
+        >User</RouterLink
+      >
+      <RouterLink to="/auth" class="nav_item" v-if="!storeAuth.user.id"
+        >Auth</RouterLink
+      >
+      <div
+        class="nav_item"
+        @click="storeAuth.logoutUser"
+        v-if="storeAuth.user.id"
+      >
+        Logout
+      </div>
     </div>
   </nav>
 </template>
+<script>
+import { useStoreAuth } from '@/stores/storeAuth';
+
+export default {
+  data() {
+    const storeAuth = useStoreAuth();
+    return {
+      storeAuth,
+    };
+  },
+};
+</script>
 <style>
 .navbar {
   display: flex;
