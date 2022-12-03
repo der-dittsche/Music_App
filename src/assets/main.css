@@ -4,4 +4,8 @@
   background-color: aliceblue;
   border-radius: 1em;
   box-shadow: 1em 1em 1em aliceblue;
+  padding: 1em;
+}
+li {
+  padding: 0.5em;
 }
