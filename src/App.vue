@@ -9,11 +9,11 @@
 import { RouterView } from 'vue-router';
 import NavBar from './components/NavBar.vue';
 import { onMounted } from 'vue';
-import { useStoreAuth } from '@/stores/storeAuth';
+import { useStoreUser } from '@/stores/storeUser';
 
-const storeAuth = useStoreAuth();
+const storeUser = useStoreUser();
 
-onMounted(() => storeAuth.initUser());
+onMounted(() => storeUser.initUser());
 </script>
 
 <style>

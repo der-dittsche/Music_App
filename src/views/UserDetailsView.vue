@@ -1,40 +1,45 @@
 <template>
   <h1>This is an about page</h1>
   <div class="container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th colspan="2">Your Userdetails</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Name</td>
-          <td>Max Mustermann</td>
-        </tr>
-        <tr>
-          <td>E-Mail</td>
-          <td>Max_Mustermann@info.me</td>
-        </tr>
-        <tr>
-          <td>Username</td>
-          <td>M&M</td>
-        </tr>
-      </tbody>
-    </table>
+    <div
+      class="userdetails"
+      v-for="details in storeUser.users"
+      :key="details.id"
+    >
+      <div class="userdetails_topic">E-Mail:</div>
+      <div class="userdetails_info">{{ details.email }}</div>
+      <div class="userdetails_change">
+        <RouterLink :to="`/edituserdetails/${details.id}`">change</RouterLink>
+      </div>
+    </div>
   </div>
 </template>
-<script></script>
+
+<script>
+import { useStoreUser } from '@/stores/storeUser';
+
+export default {
+  data() {
+    const storeUser = useStoreUser();
+
+    return {
+      storeUser,
+    };
+  },
+  methods: {},
+};
+</script>
+
 <style>
-.table {
-  width: 80%;
-  padding-left: 3em;
+.userdetails {
+  width: 100%;
+  display: flex;
 }
-th {
-  padding: 1em;
-  font-size: larger;
+.userdetails_change,
+.userdetails_topic {
+  flex: 1;
 }
-td {
-  width: 45%;
+.userdetails_info {
+  flex: 2;
 }
 </style>
