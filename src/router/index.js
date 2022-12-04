@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import ManageView from '@/views/ManageView.vue';
 import UserDetailsView from '@/views/UserDetailsView.vue';
 import EditUserDetails from '@/components/EditUserDetails.vue';
+import SongDetails from '@/components/SongDetails.vue';
 import AuthView from '@/views/AuthView.vue';
 
 const router = createRouter({
@@ -12,6 +13,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/song/:id',
+      name: 'song',
+      component: SongDetails,
     },
     {
       path: '/manage',
