@@ -12,6 +12,7 @@ import {
   doc,
   query,
   updateDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { auth } from './firebase';
 import { db } from '@/stores/firebase';
@@ -148,6 +149,11 @@ export const useStoreUser = defineStore('storeUser', {
         genre: song.genre,
         url: song.url,
       });
+    },
+    async deleteSongs(songtodelete) {
+      usersCollectionRef = collection(db, 'users', this.user.id, 'songs');
+      console.log(usersCollectionRef, songtodelete);
+      await deleteDoc(doc(usersCollectionRef, songtodelete));
     },
     async updateUser(infos) {
       usersCollectionRef = collection(db, 'users', this.user.id, 'details');
