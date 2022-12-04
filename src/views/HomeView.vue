@@ -1,13 +1,45 @@
 <template>
-  <h1>Hallo Opa</h1>
+  <h1>List of Music</h1>
   <div class="container">
     <p>Listen to you music</p>
+    <PlayerApp />
     <ul>
-      <li>Songname 1 <button>play</button></li>
-      <li>Songname 2 <button>play</button></li>
-      <li>Songname 3 <button>play</button></li>
-      <li>Songname 4 <button>play</button></li>
+      <SongItem v-for="song in songs" :key="song.id" :song="song" />
     </ul>
   </div>
 </template>
-<script></script>
+<script>
+import { useStoreUser } from '@/stores/storeUser';
+import PlayerApp from '../components/PlayerApp.vue';
+import SongItem from '@/components/SongItem.vue';
+export default {
+  data() {
+    return {
+      songs: [],
+      maxPerPage: 3,
+    };
+  },
+  components: {
+    SongItem,
+    PlayerApp,
+  },
+  created() {
+    this.getSong();
+  },
+
+  methods: {
+    async getSong() {
+      const storeUser = useStoreUser();
+      const snapshot = await storeUser.songs;
+      snapshot.forEach(document => {
+        this.songs.push({
+          docID: document.id,
+          name: document.original_name,
+          url: document.url,
+          modified_name: document.modified_name,
+        });
+      });
+    },
+  },
+};
+</script>
