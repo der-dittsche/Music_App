@@ -1,14 +1,29 @@
 <template>
   <div>
     <h1>Your choosen Song</h1>
-    <p>{{ $route.params.id }}</p>
+    <div v-for="detail in filterSong" :key="detail.id">
+      <p>{{ detail.modified_name }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import { useStoreUser } from '@/stores/storeUser';
 export default {
   data() {
-    return {};
+    const storeUser = useStoreUser();
+    return {
+      storeUser,
+    };
+  },
+  computed: {
+    filterSong() {
+      let filterSongs = this.storeUser.songs;
+      filterSongs = filterSongs.filter(item => {
+        return item.id === this.$route.params.id;
+      });
+      return filterSongs;
+    },
   },
 };
 </script>
