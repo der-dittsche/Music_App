@@ -13,14 +13,8 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'pinia';
-import usePlayerStore from '@/stores/player';
 export default {
   props: ['song'],
-
-  methods: {
-    ...mapActions(usePlayerStore, ['newSong']),
-  },
 };
 </script>
 <style>

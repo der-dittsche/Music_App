@@ -2,7 +2,6 @@
   <h1>List of Music</h1>
   <div class="container">
     <p>Listen to you music</p>
-    <PlayerApp />
     <ul>
       <SongItem v-for="song in songs" :key="song.docID" :song="song" />
     </ul>
@@ -10,7 +9,6 @@
 </template>
 <script>
 import { useStoreUser } from '@/stores/storeUser';
-import PlayerApp from '../components/PlayerApp.vue';
 import SongItem from '@/components/SongItem.vue';
 export default {
   data() {
@@ -22,7 +20,6 @@ export default {
   },
   components: {
     SongItem,
-    PlayerApp,
   },
   created() {
     this.getSong();

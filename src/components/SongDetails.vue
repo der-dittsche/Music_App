@@ -1,14 +1,19 @@
 <template>
   <div>
     <h1>Your choosen Song</h1>
+    <PlayerApp />
     <div v-for="detail in filterSong" :key="detail.id">
       <p>{{ detail.modified_name }}</p>
+      <button @click.prevent="newSong(detail)">play</button>
     </div>
   </div>
 </template>
 
 <script>
 import { useStoreUser } from '@/stores/storeUser';
+import PlayerApp from '../components/PlayerApp.vue';
+import { mapActions } from 'pinia';
+import usePlayerStore from '@/stores/player';
 export default {
   data() {
     const storeUser = useStoreUser();
@@ -16,6 +21,10 @@ export default {
       storeUser,
     };
   },
+  components: {
+    PlayerApp,
+  },
+
   computed: {
     filterSong() {
       let filterSongs = this.storeUser.songs;
@@ -24,6 +33,9 @@ export default {
       });
       return filterSongs;
     },
+  },
+  methods: {
+    ...mapActions(usePlayerStore, ['newSong']),
   },
 };
 </script>
