@@ -1,23 +1,35 @@
 <template>
   <div>
     <li>
-      <div>
-        <RouterLink :to="{ name: 'song', params: { id: song.docID } }">{{
-          song.name
-        }}</RouterLink
-        ><button @click.prevent="newSong(song)">play</button>
+      <div class="list_item">
+        <div class="song_name">
+          <RouterLink :to="{ name: 'song', params: { id: song.docID } }">{{
+            song.modified_name
+          }}</RouterLink>
+        </div>
+        <span>{{ song.comment_count }} Comments</span>
       </div>
     </li>
   </div>
 </template>
 <script>
-import { mapActions } from 'pinia';
-import usePlayerStore from '@/stores/player';
 export default {
   props: ['song'],
-
-  methods: {
-    ...mapActions(usePlayerStore, ['newSong']),
-  },
 };
 </script>
+<style>
+.list_item {
+  display: flex;
+  width: 100%;
+  gap: 1em;
+}
+.song_name {
+  flex: 7;
+}
+button {
+  flex: 1;
+}
+span {
+  flex: 1;
+}
+</style>
