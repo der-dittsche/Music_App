@@ -19,16 +19,20 @@ import { db } from '@/stores/firebase';
 
 let usersCollectionRef;
 let songsCollectionRef;
+let commentsCollectionRef;
 let usersCollectionQuerry;
 let songsCollectionQuerry;
+let commentsCollectionQuerry;
 let getUsersSnapshot = null;
 let getSongsSnapshot = null;
+let getCommentsSnapshot = null;
 
 export const useStoreUser = defineStore('storeUser', {
   state: () => {
     return {
       users: [],
       songs: [],
+      comments: [],
       user: {},
       usersLoaded: false,
       songsLoaded: false,
@@ -42,15 +46,23 @@ export const useStoreUser = defineStore('storeUser', {
           this.user.email = user.email;
           usersCollectionRef = collection(db, 'users', this.user.id, 'details');
           songsCollectionRef = collection(db, 'users', this.user.id, 'songs');
+          commentsCollectionRef = collection(
+            db,
+            'users',
+            this.user.id,
+            'comments',
+          );
           usersCollectionQuerry = query(usersCollectionRef);
           songsCollectionQuerry = query(songsCollectionRef);
           this.getUsers();
           this.getSongs();
+          this.getComments();
           this.router.push('/');
         } else {
           this.user = {};
           this.clearUsers();
           this.clearSongs();
+          this.clearComments();
           this.router.replace('/auth');
         }
       });
@@ -94,6 +106,27 @@ export const useStoreUser = defineStore('storeUser', {
         this.songs = songs;
         this.songsLoaded = true;
       });
+    },
+    async getComments() {
+      this.commentsLoaded = false;
+      commentsCollectionQuerry = query(commentsCollectionRef);
+      getCommentsSnapshot = onSnapshot(
+        commentsCollectionQuerry,
+        querySnapshot => {
+          const comments = [];
+          querySnapshot.forEach(doc => {
+            const comment = {
+              id: doc.id,
+              comment: doc.data().comment,
+              author: doc.data().author,
+            };
+            comments.push(comment);
+          });
+
+          this.comments = comments;
+          this.commentsLoaded = true;
+        },
+      );
     },
     registerUser(credentials) {
       createUserWithEmailAndPassword(
@@ -150,6 +183,13 @@ export const useStoreUser = defineStore('storeUser', {
         url: song.url,
       });
     },
+    async addComment(comment) {
+      commentsCollectionRef = collection(db, 'users', this.user.id, 'comments');
+      await addDoc(commentsCollectionRef, {
+        comment: comment.value,
+        author: comment.songid,
+      });
+    },
     async deleteSongs(songtodelete) {
       usersCollectionRef = collection(db, 'users', this.user.id, 'songs');
       console.log(usersCollectionRef, songtodelete);
@@ -169,6 +209,10 @@ export const useStoreUser = defineStore('storeUser', {
     clearSongs() {
       this.songs = [];
       if (getSongsSnapshot) getSongsSnapshot(); // unsubscribe from any listener
+    },
+    clearComments() {
+      this.commentss = [];
+      if (getCommentsSnapshot) getCommentsSnapshot(); // unsubscribe from any listener
     },
   },
   getters: {},
