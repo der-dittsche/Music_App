@@ -8,6 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "test:e2e": "cypress run",
     "dev": "vite",
+    "fbdev": "firebase emulators:start --import ./firebase-export/ --export-on-exit",
     "preview": "vite preview",
     "prepare": "husky install"
   },

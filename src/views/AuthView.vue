@@ -16,41 +16,13 @@
         Registration
       </div>
     </div>
-    <div class="auth">
-      <form action="submit" class="auth_card_auth" @submit.prevent="onSubmit">
-        <div class="auth_title">
-          <h1>{{ formTitle }}</h1>
-        </div>
-        <div class="auth_card_element">
-          <label for="auth_email" class="auth_card_label">E-Mail:</label>
-          <input
-            v-model="credentials.email"
-            type="email"
-            name="auth_email"
-            id="auth_email"
-            class="auth_card_input"
-            placeholder="lassmi_randa_den_siewillja@madrid.es"
-          />
-        </div>
-        <div class="auth_card_element">
-          <label for="auth_password" class="auth_card_label">Password:</label>
-          <input
-            v-model="credentials.password"
-            type="password"
-            name="auth_password"
-            id="auth_password"
-            class="auth_card_input"
-            placeholder="Enter a password"
-          />
-        </div>
-        <button type="submit">{{ formTitle }}</button>
-      </form>
-    </div>
+    <LogInView v-if="!register" /><RegisterView v-if="register" />
   </div>
 </template>
 <script>
-import { ref, computed, reactive } from 'vue';
-import { useStoreUser } from '@/stores/storeUser';
+import { ref, computed } from 'vue';
+import LogInView from '../components/LogInView.vue';
+import RegisterView from '../components/RegisterView.vue';
 
 export default {
   data() {
@@ -58,17 +30,10 @@ export default {
     const formTitle = computed(() => {
       return register.value ? 'Register' : 'Login';
     });
-    const credentials = reactive({
-      email: '',
-      password: '',
-    });
-    const storeUser = useStoreUser();
 
     return {
       register,
       formTitle,
-      credentials,
-      storeUser,
     };
   },
   props: {
@@ -76,18 +41,9 @@ export default {
       type: Function,
     },
   },
-  methods: {
-    onSubmit() {
-      if (!this.credentials.email || !this.credentials.password) {
-        console.log('wrong entry');
-      } else {
-        if (this.register) {
-          this.storeUser.registerUser(this.credentials);
-        } else {
-          this.storeUser.loginUser(this.credentials);
-        }
-      }
-    },
+  components: {
+    LogInView,
+    RegisterView,
   },
 };
 </script>
