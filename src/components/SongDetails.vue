@@ -28,7 +28,7 @@
           v-for="comment in filterComment"
           :key="comment.id"
         >
-          <p>Author</p>
+          <p>{{ comment.author }}</p>
           <p>Timestamp</p>
           <p>
             {{ comment.comment }}
@@ -72,7 +72,7 @@ export default {
     filterComment() {
       let filterComments = this.storeUser.comments;
       filterComments = filterComments.filter(item => {
-        return item.author === this.$route.params.id;
+        return item.song === this.$route.params.id;
       });
       return filterComments;
     },

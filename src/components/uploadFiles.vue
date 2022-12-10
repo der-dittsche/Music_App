@@ -86,6 +86,7 @@ export default {
               display_name: this.storeUser.user.email,
               original_name: task.snapshot.ref.name,
               modified_name: task.snapshot.ref.name,
+              artist: '',
               genre: '',
               comment_count: 0,
             };
