@@ -25,95 +25,135 @@
       <div class="auth_card_element">
         <label for="auth_password" class="auth_card_label">Password:</label>
         <vee-field
-          v-model="credentials.password"
-          type="password"
           name="auth_password"
-          id="auth_password"
-          class="auth_card_input"
-          placeholder="Enter a password"
-        /><ErrorMessage name="auth_password" />
+          :bails="false"
+          v-slot="{ field, errors }"
+        >
+          <input
+            v-model="credentials.password"
+            type="password"
+            id="auth_password"
+            class="auth_card_input"
+            placeholder="Enter a password"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_password_confirmed" class="auth_card_label"
           >repeat Password:</label
         >
         <vee-field
-          v-model="credentials.password_confirmed"
-          type="password"
           name="auth_password_confirmed"
-          id="auth_password_confirmed"
-          class="auth_card_input"
-          placeholder="Repeat password"
-        /><ErrorMessage name="auth_password_confirmed" />
+          :bails="false"
+          v-slot="{ field, errors }"
+        >
+          <input
+            v-model="credentials.password_confirmed"
+            type="password"
+            id="auth_password_confirmed"
+            class="auth_card_input"
+            placeholder="Repeat password"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_firstname" class="auth_card_label">Firstname:</label>
         <vee-field
-          v-model="credentials.firstname"
-          type="text"
           name="auth_firstname"
-          id="auth_firstname"
-          class="auth_card_input"
-          placeholder="Lassmi Randa"
-        /><ErrorMessage name="auth_firstname" />
+          :bails="false"
+          v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.firstname"
+            type="text"
+            id="auth_firstname"
+            class="auth_card_input"
+            placeholder="Lassmi Randa"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_lastname" class="auth_card_label">Lastname:</label>
         <vee-field
-          v-model="credentials.lastname"
-          type="text"
           name="auth_lastname"
-          id="auth_lastname"
-          class="auth_card_input"
-          placeholder="Denn Siewillja"
-        /><ErrorMessage name="auth_lastname" />
+          :bails="false"
+          v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.lastname"
+            type="text"
+            id="auth_lastname"
+            class="auth_card_input"
+            placeholder="Denn Siewillja"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_birthday" class="auth_card_label">Birthday:</label>
         <vee-field
-          v-model="credentials.birthday"
-          type="date"
           name="auth_birthday"
-          id="auth_birthday"
-          class="auth_card_input"
-        /><ErrorMessage name="auth_birthday" />
+          :bails="false"
+          v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.birthday"
+            type="date"
+            id="auth_birthday"
+            class="auth_card_input"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_country" class="auth_card_label">Country:</label>
-        <vee-field
-          v-model="credentials.country"
-          as="select"
-          name="auth_country"
-          id="auth_country"
-          class="auth_card_input"
-        >
-          <option value="Deutschland">Deutschland</option>
-          <option value="Östereich">Östereich</option>
-          <option value="Schweiz">Schweiz</option></vee-field
-        >
-        <ErrorMessage name="auth_country" />
+        <vee-field name="auth_country" :bails="false" v-slot="{ field, errors }"
+          ><select
+            v-model="credentials.country"
+            id="auth_country"
+            class="auth_card_input"
+            v-bind="field"
+          >
+            <option value="Deutschland" selected>Deutschland</option>
+            <option value="Östereich">Östereich</option>
+            <option value="Schweiz">Schweiz</option>
+          </select>
+
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_city" class="auth_card_label">City:</label>
-        <vee-field
-          v-model="credentials.city"
-          type="text"
-          name="auth_city"
-          id="auth_city"
-          class="auth_card_input"
-          placeholder="Where are u from"
-        /><ErrorMessage name="auth_city" />
+        <vee-field name="auth_city" :bails="false" v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.city"
+            type="text"
+            id="auth_city"
+            class="auth_card_input"
+            placeholder="Where are u from"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_tos" class="auth_card_label">TOS:</label>
-        <vee-field
-          v-model="credentials.tos"
-          type="checkbox"
-          name="auth_tos"
-          id="auth_tos"
-          class="auth_card_input"
-          value="true"
-        /><ErrorMessage name="auth_tos" />
+        <vee-field name="auth_tos" :bails="false" v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.tos"
+            type="checkbox"
+            id="auth_tos"
+            class="auth_card_input"
+            value="true"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <button type="submit">Register</button>
     </vee-form>

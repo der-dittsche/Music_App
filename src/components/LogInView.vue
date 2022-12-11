@@ -1,33 +1,47 @@
 <template>
   <div>
-    <form action="submit" class="auth_card_auth" @submit.prevent="onSubmit">
+    <vee-form
+      action="submit"
+      class="auth_card_auth"
+      @submit="onSubmit"
+      :validation-schema="schema_login"
+    >
       <div class="auth_title">
         <h1>Login</h1>
       </div>
       <div class="auth_card_element">
         <label for="auth_email" class="auth_card_label">E-Mail:</label>
-        <input
-          v-model="credentials.email"
-          type="email"
-          name="auth_email"
-          id="auth_email"
-          class="auth_card_input"
-          placeholder="lassmi_randa_den_siewillja@madrid.es"
-        />
+        <vee-field name="auth_email" :bails="false" v-slot="{ field, errors }">
+          <input
+            v-model="credentials.email"
+            type="email"
+            id="auth_email"
+            class="auth_card_input"
+            placeholder="lassmi_randa_denn_siewillja@madrid.es"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <div class="auth_card_element">
         <label for="auth_password" class="auth_card_label">Password:</label>
-        <input
-          v-model="credentials.password"
-          type="password"
+        <vee-field
           name="auth_password"
-          id="auth_password"
-          class="auth_card_input"
-          placeholder="Enter a password"
-        />
+          :bails="false"
+          v-slot="{ field, errors }"
+          ><input
+            v-model="credentials.password"
+            type="password"
+            id="auth_password"
+            class="auth_card_input"
+            placeholder="Enter a password"
+            v-bind="field"
+          />
+          <div v-for="error in errors" :key="error">{{ error }}</div>
+        </vee-field>
       </div>
       <button type="submit">Login</button>
-    </form>
+    </vee-form>
   </div>
 </template>
 
@@ -45,6 +59,10 @@ export default {
     return {
       credentials,
       storeUser,
+      schema_login: {
+        auth_email: 'required|min:3|max:100|email',
+        auth_password: 'required|min:8|max:100|excluded:password',
+      },
     };
   },
   methods: {
