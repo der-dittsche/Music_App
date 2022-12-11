@@ -194,15 +194,18 @@ export const useStoreUser = defineStore('storeUser', {
     },
     async deleteSongs(songtodelete) {
       usersCollectionRef = collection(db, 'songs');
-      console.log(usersCollectionRef, songtodelete);
       await deleteDoc(doc(usersCollectionRef, songtodelete));
     },
     async updateUser(infos) {
       usersCollectionRef = collection(db, 'users', this.user.id, 'details');
       await updateDoc(doc(usersCollectionRef, infos.id), {
         email: infos.email,
+        firstname: infos.firstname,
+        lastname: infos.lastname,
+        username: infos.username,
+        country: infos.country,
+        city: infos.city,
       });
-      console.log(infos.id, infos.email);
     },
     clearUsers() {
       this.users = [];
