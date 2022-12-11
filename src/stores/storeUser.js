@@ -134,12 +134,6 @@ export const useStoreUser = defineStore('storeUser', {
         auth,
         credentials.email,
         credentials.password_confirmed,
-        credentials.firstname,
-        credentials.lastname,
-        credentials.birthday,
-        credentials.country,
-        credentials.city,
-        credentials.tos,
       )
         .then(() => {
           this.addUser(credentials);
@@ -170,6 +164,12 @@ export const useStoreUser = defineStore('storeUser', {
       usersCollectionRef = collection(db, 'users', this.user.id, 'details');
       await addDoc(usersCollectionRef, {
         email: credentials.email,
+        firstname: credentials.firstname,
+        lastname: credentials.lastname,
+        birthday: credentials.birthday,
+        country: credentials.country,
+        city: credentials.city,
+        tos: credentials.tos,
       });
     },
     async addSong(song) {
