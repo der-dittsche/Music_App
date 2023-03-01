@@ -1,0 +1,19 @@
+{
+  "name": "songs/Spit You Out (Bonustrack).mp3",
+  "bucket": "music-app-e8e6a.appspot.com",
+  "metageneration": 1,
+  "generation": 1677411161453,
+  "contentType": "audio/mpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "e01d5831-1ba1-4458-ba45-613065f9069b"
+  ],
+  "etag": "kz06thevcOIvAMLZvkuELPCR1qo",
+  "customMetadata": {},
+  "timeCreated": "2023-02-26T11:32:41.453Z",
+  "updated": "2023-02-26T11:32:41.453Z",
+  "size": 7734231,
+  "md5Hash": "kbvW5j+egHMYcW4sM607Bg==",
+  "crc32c": "310906586"
+}

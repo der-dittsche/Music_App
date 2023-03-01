@@ -1,0 +1,19 @@
+{
+  "name": "songs/Hit the Floor.mp3",
+  "bucket": "music-app-e8e6a.appspot.com",
+  "metageneration": 1,
+  "generation": 1677411162225,
+  "contentType": "audio/mpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "7680e0dc-4766-47c1-9361-68016a00a5db"
+  ],
+  "etag": "5UGTp8Hat9cxgsrC3yfoHyTi03k",
+  "customMetadata": {},
+  "timeCreated": "2023-02-26T11:32:42.225Z",
+  "updated": "2023-02-26T11:32:42.225Z",
+  "size": 6851935,
+  "md5Hash": "h3Di+n5l+iQXCFLB5Qf1iA==",
+  "crc32c": "3884530920"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "songs/14 Polly.mp3",
+  "bucket": "music-app-e8e6a.appspot.com",
+  "metageneration": 1,
+  "generation": 1677580481269,
+  "contentType": "audio/mpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "5cc4a67a-3f9b-4bda-8e98-2b10036b1758"
+  ],
+  "etag": "Phnr7J1tsXcQZupTxeZ3aL2/b5U",
+  "customMetadata": {},
+  "timeCreated": "2023-02-28T10:34:41.270Z",
+  "updated": "2023-02-28T10:34:41.270Z",
+  "size": 3004773,
+  "md5Hash": "ZJVrAStfRvwMW4FJoj3O3g==",
+  "crc32c": "2762553199"
+}

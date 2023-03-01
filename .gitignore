@@ -1,5 +1,4 @@
 # Logs
-.eslintcache
 logs
 *.log
 npm-debug.log*
@@ -17,8 +16,7 @@ coverage
 
 /cypress/videos/
 /cypress/screenshots/
-/firebase-export-*
-
+/saved-data/
 
 # Editor directories and files
 .vscode/*

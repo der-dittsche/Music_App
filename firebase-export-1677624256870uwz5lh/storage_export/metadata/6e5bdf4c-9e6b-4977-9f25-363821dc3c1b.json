@@ -1,0 +1,19 @@
+{
+  "name": "songs/Tears Don't Fall.mp3",
+  "bucket": "music-app-e8e6a.appspot.com",
+  "metageneration": 1,
+  "generation": 1677411162631,
+  "contentType": "audio/mpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "fc49a6f9-4ccf-4661-b7e8-67ab4b076298"
+  ],
+  "etag": "hgamgxXJD42vhK3+c4ksNTTJDus",
+  "customMetadata": {},
+  "timeCreated": "2023-02-26T11:32:42.631Z",
+  "updated": "2023-02-26T11:32:42.631Z",
+  "size": 10812975,
+  "md5Hash": "atIyt2IcdsL3cEtSMr9QHw==",
+  "crc32c": "540198764"
+}
