@@ -1,57 +1,61 @@
 <template>
   <nav>
-    <div class="navbar">
-      <RouterLink to="/" class="nav_item" v-if="storeUser.user.id"
-        >Home</RouterLink
-      >
-      <RouterLink to="/manage" class="nav_item" v-if="storeUser.user.id"
-        >Manage</RouterLink
-      >
-      <RouterLink to="/user" class="nav_item" v-if="storeUser.user.id"
-        >User</RouterLink
-      >
-      <RouterLink to="/auth" class="nav_item" v-if="!storeUser.user.id"
-        >Auth</RouterLink
-      >
+    <div class="nav__title">DNW</div>
+    <ul class="primary-nav">
+      <li>
+        <RouterLink to="/"><div class="nav-item">Home</div></RouterLink>
+      </li>
+      <li v-if="storeUser.user.id">
+        <RouterLink to="/about"><div class="nav-item">About</div></RouterLink>
+      </li>
+      <li v-if="storeUser.user.id">
+        <RouterLink to="/manage"><div class="nav-item">Manage</div></RouterLink>
+      </li>
+    </ul>
+    <div class="nav__auth">
       <div
-        class="nav_item"
+        class="nav-item"
+        v-if="!storeUser.user.id"
+        @click.prevent="toggleAuthModal"
+      >
+        Login
+      </div>
+      <div
+        class="nav-item"
         @click="storeUser.logoutUser"
         v-if="storeUser.user.id"
       >
-        Logout
+        LogOut
       </div>
     </div>
+    <AuthView></AuthView>
   </nav>
 </template>
+
 <script>
-import { useStoreUser } from '@/stores/storeUser';
+import { useUserStore } from "@/stores/users";
+import AuthView from "@/components/AuthView.vue";
+import { mapStores } from "pinia";
+import useModalStore from "@/stores/modal";
 
 export default {
   data() {
-    const storeUser = useStoreUser();
+    const storeUser = useUserStore();
+
     return {
       storeUser,
     };
   },
+  components: {
+    AuthView,
+  },
+  computed: {
+    ...mapStores(useModalStore),
+  },
+  methods: {
+    toggleAuthModal() {
+      this.modalStore.isOpen = !this.modalStore.isOpen;
+    },
+  },
 };
 </script>
-<style>
-.navbar {
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  justify-content: space-around;
-}
-.nav_item {
-  all: unset;
-  cursor: pointer;
-  background-color: cornflowerblue;
-  width: 100%;
-  font-size: 1.25em;
-  text-align: center;
-  padding-block: 1.25em;
-}
-.nav_item:hover {
-  background-color: rgb(157, 185, 236);
-}
-</style>

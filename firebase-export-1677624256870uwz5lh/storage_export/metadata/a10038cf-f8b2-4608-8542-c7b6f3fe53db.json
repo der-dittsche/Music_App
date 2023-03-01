@@ -1,0 +1,19 @@
+{
+  "name": "songs/11 Heart-Shaped Box.mp3",
+  "bucket": "music-app-e8e6a.appspot.com",
+  "metageneration": 1,
+  "generation": 1677580481719,
+  "contentType": "audio/mpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "1bc5ae6e-e7a1-4b23-9d85-ec035f49cb10"
+  ],
+  "etag": "vC8T3Ho0wnj64QKb/shNm3zIVXo",
+  "customMetadata": {},
+  "timeCreated": "2023-02-28T10:34:41.719Z",
+  "updated": "2023-02-28T10:34:41.719Z",
+  "size": 5635315,
+  "md5Hash": "3Q6ZvdM+X8WUDYgeiuuElg==",
+  "crc32c": "1621728056"
+}
