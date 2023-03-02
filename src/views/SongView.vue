@@ -136,7 +136,7 @@ export default {
         this.$route.params.id,
         "comment"
       );
-      const uploadtime = new Date().toString();
+      const uploadtime = new Date().toLocaleString();
       await addDoc(commentCollectionRef, {
         username: this.song.display_name,
         comment: comment.text,

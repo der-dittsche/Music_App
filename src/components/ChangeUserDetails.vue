@@ -1,7 +1,7 @@
 <template>
-  <div class="modal" :class="hiddenClassUser">
-    <div class="modal__container">
-      <div class="modal__close" @click="isOpenUser = false">X</div>
+  <section class="modal modal2" :class="[hiddenClassUser, closeModalsUser]">
+    <div class="modal__container" :class="closeModalsboxUser">
+      <div class="modal__close" @click="closeModal">X</div>
       <div class="user__details">This are a user details page</div>
 
       <vee-form @submit="changeUsername" :validation-schema="schema_user"
@@ -14,7 +14,7 @@
         <button type="submit">Submit</button>
       </vee-form>
     </div>
-  </div>
+  </section>
 </template>
 <script>
 import { mapStores, mapState, mapWritableState } from "pinia";
@@ -33,8 +33,16 @@ export default {
   },
   computed: {
     ...mapStores(useModalStore),
-    ...mapState(useModalStore, ["hiddenClassUser"]),
-    ...mapWritableState(useModalStore, ["isOpenUser"]),
+    ...mapState(useModalStore, [
+      "hiddenClassUser",
+      "closeModalsUser",
+      "closeModalsboxUser",
+    ]),
+    ...mapWritableState(useModalStore, [
+      "isOpenUser",
+      "isOpenUserModal",
+      "isOpenUserModalBox",
+    ]),
   },
   props: {
     user: {
@@ -56,8 +64,34 @@ export default {
       };
       this.storeUser.updateUser(username);
       resetForm();
-      this.modalStore.isOpenUser = !this.modalStore.isOpenUser;
+      this.modalStore.isOpenUserModal = !this.modalStore.isOpenModal;
+      this.modalStore.isOpenUserModalBox = !this.modalStore.isOpenUserModalBox;
+      setTimeout(() => {
+        this.modalStore.isOpenUser = !this.modalStore.isOpenUser;
+        this.modalStore.isOpenUserModal = !this.modalStore.isOpenUserModal;
+        this.modalStore.isOpenUserModalBox =
+          !this.modalStore.isOpenUserModalBox;
+      }, 800);
     },
+    closeModal() {
+      this.modalStore.isOpenUserModal = !this.modalStore.isOpenUserModal;
+      this.modalStore.isOpenUserModalBox = !this.modalStore.isOpenUserModalBox;
+      setTimeout(() => {
+        this.modalStore.isOpenUser = !this.modalStore.isOpenUser;
+        this.modalStore.isOpenUserModal = !this.modalStore.isOpenUserModal;
+        this.modalStore.isOpenUserModalBox =
+          !this.modalStore.isOpenUserModalBox;
+      }, 800);
+    },
+  },
+  mounted() {
+    const modalRef = document.querySelector(".modal2");
+
+    modalRef.addEventListener("click", (e) => {
+      if (e.target.nodeName === "SECTION") {
+        this.closeModal();
+      }
+    });
   },
 };
 </script>
