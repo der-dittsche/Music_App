@@ -6,10 +6,13 @@
         <RouterLink to="/"><div class="nav-item">Home</div></RouterLink>
       </li>
       <li v-if="storeUser.user.id">
-        <RouterLink to="/about"><div class="nav-item">About</div></RouterLink>
+        <RouterLink to="/about"><div class="nav-item">User</div></RouterLink>
       </li>
       <li v-if="storeUser.user.id">
         <RouterLink to="/manage"><div class="nav-item">Manage</div></RouterLink>
+      </li>
+      <li>
+        <RouterLink to="/news"><div class="nav-item">News</div></RouterLink>
       </li>
     </ul>
     <div class="nav__auth">

@@ -47,6 +47,17 @@ const routes = [
     },
   },
   {
+    path: "/news",
+    name: "news",
+    component: () => import("@/views/NewsView.vue"),
+    beforeEnter: (to, from, next) => {
+      next();
+    },
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
     path: "/auth",
     name: "auth",
     component: () => import("@/components/AuthView.vue"),

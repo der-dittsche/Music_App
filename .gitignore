@@ -17,6 +17,7 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 /saved-data/
+/firebase*
 
 # Editor directories and files
 .vscode/*

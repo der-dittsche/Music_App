@@ -150,11 +150,25 @@
             <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
         </vee-field>
+        <p
+          class="form__card-tos"
+          @click.prevent="this.show_tos = !this.show_tos"
+        >
+          Terms of Service
+        </p>
       </div>
       <div class="form__card-element">
         <button type="submit" class="form__card-btn">Login</button>
       </div>
     </vee-form>
+    <div class="auth__tos" v-if="this.show_tos">
+      <h2>Terms of Service</h2>
+      <p>This app is only a technical demo</p>
+      <p><b>Dont't</b> use this app for private or commercial use!</p>
+      <p>All Uploads/Comments/User clean up every evening</p>
+      <p>Any misuse will be reported</p>
+      <p></p>
+    </div>
   </div>
 </template>
 <script>
@@ -187,6 +201,7 @@ export default {
         auth_birthday: "required",
         auth_tos: "tos",
       },
+      show_tos: false,
     };
   },
   methods: {
