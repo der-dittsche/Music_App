@@ -20,8 +20,9 @@
               autocomplete="off"
               v-bind="field"
             />
+
+            <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
-          <div v-for="error in errors" :key="error">{{ error }}</div>
         </vee-field>
       </div>
       <div class="form__card-element">
@@ -38,8 +39,9 @@
               autocomplete="off"
               v-bind="field"
             />
+
+            <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
-          <div v-for="error in errors" :key="error">{{ error }}</div>
         </vee-field>
       </div>
       <div class="form__card-element">
@@ -56,8 +58,9 @@
               autocomplete="off"
               v-bind="field"
             />
+
+            <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
-          <div v-for="error in errors" :key="error">{{ error }}</div>
         </vee-field>
       </div>
       <div class="form__card-element">
@@ -74,8 +77,9 @@
               autocomplete="off"
               v-bind="field"
             />
+
+            <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
-          <div v-for="error in errors" :key="error">{{ error }}</div>
         </vee-field>
       </div>
       <div class="form__card-element">
@@ -142,11 +146,14 @@
               value="true"
               v-bind="field"
             />
+
+            <div v-for="error in errors" :key="error">{{ error }}</div>
           </div>
-          <div v-for="error in errors" :key="error">{{ error }}</div>
         </vee-field>
       </div>
-      <button type="submit">Login</button>
+      <div class="form__card-element">
+        <button type="submit" class="form__card-btn">Login</button>
+      </div>
     </vee-form>
   </div>
 </template>

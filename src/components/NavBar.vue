@@ -28,8 +28,8 @@
         LogOut
       </div>
     </div>
-    <AuthView></AuthView>
   </nav>
+  <AuthView></AuthView>
 </template>
 
 <script>

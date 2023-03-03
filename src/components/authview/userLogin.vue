@@ -41,7 +41,9 @@
         >
       </div>
       <div class="form__card-element">
-        <button type="submit" @click="isOpen = false">Login</button>
+        <button type="submit" @click="isOpen = false" class="form__card-btn">
+          Login
+        </button>
       </div>
     </vee-form>
   </div>
