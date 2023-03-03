@@ -29,7 +29,7 @@ export default {
     const storeMusic = useSongsStore();
     return {
       songs: [],
-      maxPerPage: 10,
+      maxPerPage: 12,
       pendingRequest: false,
       listetSongsSnapshot: null,
       allSongsSnapshot: null,

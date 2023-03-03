@@ -10,7 +10,7 @@ export const usePlayerStore = defineStore("player", {
     seek: "00:00",
     duration: "00:00",
     playerProgress: "0%",
-    volumeHeight: "0%",
+    volumeWidth: "0%",
   }),
   actions: {
     async newSong(song) {
@@ -56,12 +56,12 @@ export const usePlayerStore = defineStore("player", {
       }
     },
     updateVolume(event) {
-      const { y, height } = event.currentTarget.getBoundingClientRect();
-      const clickY = event.clientY - y;
-      const percentageY = clickY / height;
-      const volume = 1 - percentageY;
+      const { x, width } = event.currentTarget.getBoundingClientRect();
+      const clickX = event.clientX - x;
+      const percentage = clickX / width;
+      const volume = percentage;
       this.volume = volume;
-      this.volumeHeight = `${this.volume * 100}%`;
+      this.volumeWidth = `${this.volume * 100}%`;
       this.setVol(volume);
     },
     setVol(val) {

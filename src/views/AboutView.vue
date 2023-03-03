@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>This is an about page</h1>
-    <p>about me</p>
+
     <div class="container">
       <div v-for="details in storeUser.users" :key="details.id">
         <div class="userdetails">
@@ -25,7 +25,9 @@
           </div>
         </div>
       </div>
-      <button @click="toggleUserDetailsModal">Change Details</button>
+      <button @click="toggleUserDetailsModal" class="userdetails__btn">
+        Change Details
+      </button>
     </div>
     <ChangeUserDetails
       v-for="details in storeUser.users"

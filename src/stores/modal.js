@@ -9,6 +9,7 @@ export default defineStore("modal", {
     isOpenUserModal: true,
     isOpenUserModalBox: true,
     isOpenVol: false,
+    isOpenPlayer: false,
   }),
   getters: {
     hiddenClass(state) {
@@ -31,6 +32,9 @@ export default defineStore("modal", {
     },
     hiddenClassVol(state) {
       return !state.isOpenVol ? "hidden" : "";
+    },
+    hiddenClassPlayer(state) {
+      return !state.isOpenPlayer ? "hidden" : "";
     },
   },
 });

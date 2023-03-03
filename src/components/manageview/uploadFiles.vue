@@ -26,8 +26,8 @@
       />
     </div>
     <ul v-for="upload in uploads" :key="upload.name">
-      <li>
-        <div>{{ upload.name }}</div>
+      <li class="uploads__your-song-li">
+        <div class="uploads__your-song-name">{{ upload.name }}</div>
         <div class="progressbar">
           <div
             class="progress"

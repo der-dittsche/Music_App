@@ -21,36 +21,42 @@
         </div>
 
         <vee-form
+          class="comment__form"
           @submit="addComment"
           :validation-schema="schema_comment"
           v-if="storeUser.user.id"
-        >
-          <vee-field
-            as="textarea"
-            name="comment"
-            placeholder="Add a comment here..."
-            autocomplete="off"
-          ></vee-field>
+          ><div class="comments__form-el">
+            <vee-field
+              as="textarea"
+              name="comment"
+              placeholder="Add a comment here..."
+              autocomplete="off"
+            ></vee-field>
+          </div>
           <ErrorMessage name="comment" />
 
-          <button type="submit" :disabled="comment_in_submission">
+          <button
+            type="submit"
+            :disabled="comment_in_submission"
+            class="comments__btn"
+          >
             Submit
           </button>
         </vee-form>
-        <select v-model="sort">
+        <select v-model="sort" class="comments__select">
           <option value="1">Latest</option>
           <option value="2">Oldest</option>
         </select>
         <div
-          class="songlist__item"
+          class="comments__item"
           v-for="comment in sortedComments"
           :key="comment.id"
         >
-          <div class="songlist__items-info">
-            <h3>{{ comment.username }}</h3>
-            <p>{{ comment.timestamp }}</p>
+          <div class="comments__items-comments">{{ comment.comment }}</div>
+          <div class="comments__items-info">
+            <p>{{ comment.username }}</p>
+            <p class="comments__items-date">{{ comment.timestamp }}</p>
           </div>
-          <div class="songlist__items-comments">{{ comment.comment }}</div>
         </div>
       </div>
     </section>
